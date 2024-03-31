@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  let is_shop_open = true;
+  let stocks = {
+    Fruits : ["strawberry", "grapes", "banana", "apple"],
+    liquid : ["water", "ice"],
+    holder : ["cone", "cup", "stick"],
+    toppings : ["chocolate", "peanuts"],
+  };
+    let order = ( time, work ) => {
+
+        return new Promise( ( resolve, reject )=>{
+      
+          if( is_shop_open ){
+      
+            setTimeout(()=>{
+              resolve( work() )
+             }, time)
+      
+          }
+      
+          else{
+            reject( console.log("Our shop is closed") )
+          }
+      
+        })
+      }
+order(2000,()=>console.log(`${stocks.Fruits[0]} was selected`))
+.then(()=>{
+  return order(1000,()=>console.log('production has started'))
+})
+.then(()=>{
+  return order(2000, ()=>console.log("Finely chop the fruits"))
+})
+.then(()=>{
+    return order(2000, ()=>console.log("Prepare a pulp of the fruit by cooking it with sugar syrup"))
+})
+.then(()=>{
+    return order(2000, ()=>console.log("Prepare the machine by adding ice"))
+  })
+.then(()=>{
+  return order(1000, ()=>console.log("Mix the cream and fruit pulp thoroughly"))
+})
+.then(()=>{
+  return order(1000, ()=>console.log("Add dry fruits and nuts of choice if necessary"))
+})
+.then(()=>{
+    return order(2000, ()=>console.log("The machine is started after adding the cream mixture"))
+})
+.then(()=>{
+  return order(2000, ()=>console.log(`Ice cream placed on ${stocks.holder[1]}`))
+})
+.then(()=>{
+  return order(3000, ()=>console.log(`${stocks.toppings[0]} is selected as toppings. Chocolate Sauce drizzled over the ice cream`))
+})
+.then(()=>{
+  return order(2000, ()=>console.log("Fresh Ice Cream is served"))
+})
+.finally(()=>{
+    console.log("end of day")
+})
+</script>
+</body>
+</html>

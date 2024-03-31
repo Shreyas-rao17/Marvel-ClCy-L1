@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Performance Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Student Performance Calculator</h1>
+
+  <form id="studentForm">
+    <label for="name">Student Name:</label>
+    <input type="text" id="name" required>
+    <label for="marks">Total Marks Obtained in 6 subjects(each out of 100):</label>
+    <input type="number" id="marks" required>
+    <button type="button" onclick="addStudent()">Add Student</button>
+  </form>
+
+  <h2>Student List (in decreasing order of rank)</h2>
+
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Student Name</th>
+        <th>Marks Obtained</th>
+        <th>Percentage</th>
+      </tr>
+    </thead>
+    <tbody id="studentBody">
+    </tbody>
+  </table>
+
+  <h2>Class Statistics</h2>
+  <p>Average Percentage: <span id="averagePercentage">0%</span></p>
+
+  <script>
+    let students = []; 
+
+    function addStudent() {
+      const name = document.getElementById('name').value;
+      const marks = parseFloat(document.getElementById('marks').value);
+
+      if (name !== '' && !isNaN(marks)) {
+        const percentage = (marks / 600) * 100;
+        
+        students.push({ name, marks, percentage });
+        students.sort((a,b) => b.marks - a.marks); 
+        updateTable();
+        calculateStatistics();
+        clearForm();
+      } else {
+        alert('Please enter valid values for Name and Marks.');
+      }
+    }
+    
+
+    function updateTable() {
+      const tableBody = document.getElementById('studentBody');
+      tableBody.innerHTML = '';
+
+      students.forEach((student, index) => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).innerText = index + 1;
+        row.insertCell(1).innerText = student.name;
+        row.insertCell(2).innerText = student.marks;
+        row.insertCell(3).innerText = student.percentage.toFixed(2) + '%';
+        
+      });
+    }
+
+    function calculateStatistics() {
+      const totalPercentage = students.reduce((sum, student) => sum + student.percentage, 0);
+      const averagePercentage = totalPercentage / students.length || 0;
+
+      document.getElementById('averagePercentage').innerText = averagePercentage.toFixed(2) + '%';
+    }
+
+    function clearForm() {
+      document.getElementById('name').value = '';
+      document.getElementById('marks').value = '';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let stocks = {
+        Fruits : ["strawberry", "grapes", "banana", "apple"],
+        liquid : ["water", "ice"],
+        holder : ["cone", "cup", "stick"],
+        toppings : ["chocolate", "peanuts"],
+     };
+    let order = (fruit_name, call_production) =>{
+
+        setTimeout(function(){
+      
+          console.log(`${stocks.Fruits[fruit_name]} was selected`)
+         call_production();
+        },2000)
+    };
+    let production = () =>{
+        setTimeout(()=>{
+            console.log("Ice Cream production has started")
+            setTimeout(()=>{
+                console.log("Finely chop the fruits")
+                setTimeout(()=>{
+                  console.log("Prepare a pulp of the fruit by cooking it with sygar syrup")
+                  setTimeout(()=>{
+                    console.log("Prepare the machine by adding Ice")
+                    setTimeout(()=>{
+                        console.log("Mix the cream and fruit pulp thoroughly")
+                        setTimeout(()=>{
+                            console.log("Add dry fruits and nuts of choice if necessary")
+                            setTimeout(()=>{
+                                console.log("The machine is started after adding the cream mixture")
+                                setTimeout(()=>{
+                                    console.log(`Ice cream placed on ${stocks.holder[1]}`)
+                                    setTimeout(()=>{
+                                        console.log(`${stocks.toppings[0]} is selected as toppings. Chocolate Sauce drizzled over the ice cream `)
+                                        setTimeout(()=>{
+                                            console.log("Fresh Ice Cream is served")
+                                        },1000)
+                                    },2000)
+                                },3000)
+                            },1000)
+                        },1000)
+                    },1000)
+                  },1000)  
+                },1000)
+            },2000)
+        },1000)
+    };
+    order(0, production);
+</script>        
+</body>
+</html>
